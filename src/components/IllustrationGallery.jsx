@@ -1,16 +1,17 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { 
   ExternalLink, 
   Eye, 
-  X
+  X,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react'
-import useSoundEffects from '../hooks/useSoundEffects'
 
 const IllustrationGallery = () => {
   const [selectedImage, setSelectedImage] = useState(null)
+  const [currentIndex, setCurrentIndex] = useState(0)
   const sectionRef = useRef(null)
-  const { playSound } = useSoundEffects()
 
   // Scroll-based animations
   const { scrollYProgress } = useScroll({
@@ -114,15 +115,52 @@ const IllustrationGallery = () => {
   // Use all illustrations without filtering
   const filteredIllustrations = illustrations
 
-  const openModal = (image) => {
+  const openModal = (image, index) => {
     setSelectedImage(image)
-    playSound('cardClick')
+    setCurrentIndex(index)
+    // Auto scroll to modal when opened
+    setTimeout(() => {
+      const modal = document.querySelector('[data-modal="illustration"]')
+      if (modal) {
+        modal.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      }
+    }, 100)
   }
 
   const closeModal = () => {
     setSelectedImage(null)
-    playSound('cardClick')
+    setCurrentIndex(0)
   }
+
+  const nextImage = () => {
+    const nextIndex = (currentIndex + 1) % filteredIllustrations.length
+    setCurrentIndex(nextIndex)
+    setSelectedImage(filteredIllustrations[nextIndex])
+  }
+
+  const prevImage = () => {
+    const prevIndex = currentIndex === 0 ? filteredIllustrations.length - 1 : currentIndex - 1
+    setCurrentIndex(prevIndex)
+    setSelectedImage(filteredIllustrations[prevIndex])
+  }
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!selectedImage) return
+      
+      if (e.key === 'ArrowLeft') {
+        prevImage()
+      } else if (e.key === 'ArrowRight') {
+        nextImage()
+      } else if (e.key === 'Escape') {
+        closeModal()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [selectedImage, currentIndex])
 
   return (
     <motion.section 
@@ -209,8 +247,7 @@ const IllustrationGallery = () => {
                   y: -8
                 }}
                 whileTap={{ scale: 0.97 }}
-                onHoverStart={() => playSound('cardHover')}
-                onClick={() => openModal(illustration)}
+                onClick={() => openModal(illustration, index)}
               >
                 {/* Simple Image */}
                 <img
@@ -238,26 +275,27 @@ const IllustrationGallery = () => {
           </AnimatePresence>
         </motion.div>
 
-        {/* Responsive Modal */}
+        {/* Responsive Modal with Fullscreen Image */}
         <AnimatePresence>
           {selectedImage && (
             <motion.div
-              className="fixed inset-0 bg-black/90 backdrop-blur-sm z-[200] flex items-center justify-center p-4"
+              className="fixed inset-0 bg-black/95 backdrop-blur-md z-[200] flex items-center justify-center p-4 sm:p-6"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={closeModal}
+              data-modal="illustration"
             >
               <motion.div
-                className="relative bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl"
-                initial={{ scale: 0.9, opacity: 0 }}
+                className="relative bg-black rounded-xl w-full max-w-5xl h-[85vh] sm:h-[90vh] overflow-hidden shadow-2xl"
+                initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
+                exit={{ scale: 0.8, opacity: 0 }}
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Close Button */}
                 <motion.button
-                  className="absolute top-4 right-4 z-10 bg-white/90 backdrop-blur-sm text-gray-600 p-2 rounded-full hover:bg-white transition-colors duration-300 shadow-lg"
+                  className="absolute top-4 right-4 z-10 bg-black/50 backdrop-blur-sm text-white p-2 rounded-full hover:bg-black/70 transition-colors duration-300 shadow-lg border border-white/20"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={closeModal}
@@ -265,37 +303,88 @@ const IllustrationGallery = () => {
                   <X className="w-5 h-5" />
                 </motion.button>
 
-                {/* Image Container */}
-                <div className="relative">
-                  <img
+                {/* Navigation Arrows */}
+                <motion.button
+                  className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 z-10 bg-black/60 backdrop-blur-sm text-white p-2 sm:p-3 rounded-full hover:bg-black/80 transition-all duration-300 shadow-lg border border-white/30"
+                  onClick={prevImage}
+                  whileHover={{ scale: 1.1, x: -2 }}
+                  whileTap={{ scale: 0.9 }}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, delay: 0.2 }}
+                >
+                  <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+                </motion.button>
+
+                <motion.button
+                  className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 z-10 bg-black/60 backdrop-blur-sm text-white p-2 sm:p-3 rounded-full hover:bg-black/80 transition-all duration-300 shadow-lg border border-white/30"
+                  onClick={nextImage}
+                  whileHover={{ scale: 1.1, x: 2 }}
+                  whileTap={{ scale: 0.9 }}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, delay: 0.2 }}
+                >
+                  <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+                </motion.button>
+
+                {/* Fullscreen Image Container */}
+                <div className="relative w-full h-full flex items-center justify-center bg-black">
+                  <motion.img
+                    key={currentIndex}
                     src={selectedImage.image}
                     alt="Illustration"
-                    className="w-full h-80 sm:h-96 md:h-[500px] object-cover"
+                    className="max-w-full max-h-full object-contain"
                     loading="eager"
                     decoding="async"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.3 }}
+                    style={{ 
+                      maxWidth: '100%', 
+                      maxHeight: '100%',
+                      width: 'auto',
+                      height: 'auto'
+                    }}
                   />
                 </div>
 
-                {/* Content Panel */}
-                <div className="p-4 sm:p-6">
+                {/* Image Counter */}
+                <motion.div
+                  className="absolute top-4 left-4 z-10 bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs sm:text-sm border border-white/30"
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: 0.3 }}
+                >
+                  {currentIndex + 1} / {filteredIllustrations.length}
+                </motion.div>
+
+                {/* Compact Content Overlay */}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2 sm:p-3">
                   {/* Description */}
-                  <div className="mb-4">
-                    <p className="text-primary-dark/80 text-sm sm:text-base leading-relaxed text-center">
+                  <div className="mb-2 sm:mb-3">
+                    <p className="text-white text-xs sm:text-sm leading-relaxed text-center max-w-xl mx-auto line-clamp-2">
                       {selectedImage.description}
                     </p>
                   </div>
 
                   {/* Tags */}
-                  <div className="mb-6">
-                    <div className="flex flex-wrap justify-center gap-2">
-                      {selectedImage.tags.map((tag) => (
+                  <div className="mb-2 sm:mb-3">
+                    <div className="flex flex-wrap justify-center gap-1 sm:gap-1.5">
+                      {selectedImage.tags.slice(0, 3).map((tag) => (
                         <span
                           key={tag}
-                          className="bg-primary-light/20 text-primary-dark px-3 py-1 rounded-full text-xs sm:text-sm"
+                          className="bg-white/20 text-white px-2 py-1 rounded-full text-xs backdrop-blur-sm"
                         >
                           {tag}
                         </span>
                       ))}
+                      {selectedImage.tags.length > 3 && (
+                        <span className="bg-white/20 text-white px-2 py-1 rounded-full text-xs backdrop-blur-sm">
+                          +{selectedImage.tags.length - 3}
+                        </span>
+                      )}
                     </div>
                   </div>
 
@@ -304,12 +393,12 @@ const IllustrationGallery = () => {
                     href={selectedImage.pinterestUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full bg-primary-dark text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg text-center font-medium hover:bg-primary-dark/90 transition-colors duration-300 flex items-center justify-center space-x-2 text-sm sm:text-base"
-                    whileHover={{ scale: 1.02 }}
+                    className="w-full max-w-xs mx-auto bg-white/20 backdrop-blur-sm text-white px-3 py-1.5 rounded-lg text-center font-medium hover:bg-white/30 transition-colors duration-300 flex items-center justify-center space-x-1 text-xs border border-white/30"
+                    whileHover={{ scale: 1.02, y: -1 }}
                     whileTap={{ scale: 0.98 }}
-                    onClick={() => playSound('cardClick')}
+                    onClick={() => {}}
                   >
-                    <ExternalLink className="w-4 h-4" />
+                    <ExternalLink className="w-3 h-3" />
                     <span>View on Pinterest</span>
                   </motion.a>
                 </div>

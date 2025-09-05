@@ -208,15 +208,15 @@ body {
 /* Neumorphism + Glassmorphism Utilities */
 .glass {
   background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .glass-dark {
   background: rgba(21, 77, 113, 0.1);
-  backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
   border: 1px solid rgba(21, 77, 113, 0.2);
 }
 
@@ -250,8 +250,8 @@ body {
 
 .glass-card {
   background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
+  backdrop-filter: blur(25px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 
     0 8px 32px rgba(0, 0, 0, 0.1),
@@ -260,8 +260,8 @@ body {
 
 .glass-card-dark {
   background: rgba(21, 77, 113, 0.15);
-  backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
+  backdrop-filter: blur(25px);
   border: 1px solid rgba(21, 77, 113, 0.3);
   box-shadow: 
     0 8px 32px rgba(0, 0, 0, 0.1),
@@ -270,8 +270,8 @@ body {
 
 .floating-card {
   background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 
     0 20px 40px rgba(0, 0, 0, 0.1),
@@ -306,15 +306,15 @@ body {
 /* Enhanced glassmorphism effects */
 .glass-soft {
   background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .glass-strong {
   background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
+  backdrop-filter: blur(30px);
   border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
@@ -767,25 +767,4 @@ body {
   --primary-light: #FFF9AF;
   --theme-bg: #f5f7fa;
   --theme-text: #154D71;
-}
-
-/* Sound Effects Indicator */
-.sound-indicator {
-  position: fixed;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(21, 77, 113, 0.1);
-  backdrop-filter: blur(10px);
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 12px;
-  color: var(--primary-dark);
-  z-index: 50;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.sound-indicator.show {
-  opacity: 1;
 }

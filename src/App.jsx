@@ -12,9 +12,11 @@ import Footer from './components/Footer'
 import CustomCursor from './components/CustomCursor'
 import ScrollProgress from './components/ScrollProgress'
 import ThemeSwitcher from './components/ThemeSwitcher'
+import SplashScreen from './components/SplashScreen'
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [showSplash, setShowSplash] = useState(true)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,26 +28,36 @@ function App() {
 
   return (
     <div className="App">
-      {/* Custom Cursor */}
-      <CustomCursor />
-      
-      {/* Theme Switcher */}
-      <ThemeSwitcher />
-      
-      {/* Scroll Progress */}
-      <ScrollProgress />
+      {/* Splash Screen */}
+      {showSplash && (
+        <SplashScreen onComplete={() => setShowSplash(false)} />
+      )}
       
       {/* Main Content */}
-      <Navigation isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
-      <HeroSection />
-      <AboutSection />
-      <SkillsSection />
-      <ProjectsSection />
-      <ExperienceSection />
-      <HobbiesSection />
-      <IllustrationGallery />
-      <ContactSection />
-      <Footer />
+      {!showSplash && (
+        <>
+          {/* Custom Cursor */}
+          <CustomCursor />
+          
+          {/* Theme Switcher */}
+          <ThemeSwitcher />
+          
+          {/* Scroll Progress */}
+          <ScrollProgress />
+          
+          {/* Main Content */}
+          <Navigation isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
+          <HeroSection />
+          <AboutSection />
+          <SkillsSection />
+          <ProjectsSection />
+          <ExperienceSection />
+          <HobbiesSection />
+          <IllustrationGallery />
+          <ContactSection />
+          <Footer />
+        </>
+      )}
     </div>
   )
 }

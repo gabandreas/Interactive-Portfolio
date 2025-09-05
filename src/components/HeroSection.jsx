@@ -1,7 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { ChevronDown, Code, Palette, Database, Smartphone, Globe, Sparkles, Github, Linkedin, Mail } from 'lucide-react'
-import useSoundEffects from '../hooks/useSoundEffects'
 import { TypewriterText, GradientText, ParticleText, TextReveal } from './AnimatedText'
 import { RippleButton, MagneticButton } from './MicroInteractions'
 import { SplitMorphingText, WaveMorphingText, FlipMorphingText } from './MorphingText'
@@ -12,7 +11,6 @@ const HeroSection = () => {
   const opacity = useTransform(scrollY, [0, 800], [1, 0.1])
   const scale = useTransform(scrollY, [0, 800], [1, 0.8])
   const rotate = useTransform(scrollY, [0, 800], [0, 5])
-  const { playSound } = useSoundEffects()
   const [currentRole, setCurrentRole] = useState(0)
   
   const roles = [
@@ -383,7 +381,7 @@ const HeroSection = () => {
 
       {/* Enhanced scroll indicator with smooth animation */}
       <motion.div 
-        className="absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 cursor-pointer z-20"
+        className="absolute bottom-2 sm:bottom-4 inset-x-0 mx-auto cursor-pointer z-20 w-fit"
         animate={{ 
           y: [0, 12, 0],
           scale: [1, 1.05, 1]
@@ -401,9 +399,9 @@ const HeroSection = () => {
         }}
         whileTap={{ scale: 0.8 }}
       >
-        <div className="flex flex-col items-center group">
+        <div className="flex flex-col items-center group text-center">
           <motion.span 
-            className="text-xs sm:text-sm text-primary-dark/60 mb-2 font-medium group-hover:text-primary-dark transition-colors duration-300"
+            className="text-xs sm:text-sm text-primary-dark/60 mb-2 font-medium group-hover:text-primary-dark transition-colors duration-300 text-center"
             animate={{ opacity: [0.6, 1, 0.6] }}
             transition={{ duration: 2, repeat: Infinity }}
           >

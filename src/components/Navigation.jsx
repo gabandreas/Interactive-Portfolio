@@ -126,12 +126,13 @@ const Navigation = ({ isOpen, setIsOpen }) => {
       {/* Full Screen Mobile Menu */}
       <motion.div
         id="mobile-menu"
-        className={`fixed inset-0 z-[150] lg:hidden ${
-          isOpen ? 'block' : 'hidden'
-        }`}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isOpen ? 1 : 0 }}
-        transition={{ duration: 0.3 }}
+        className="fixed inset-0 z-[150] lg:hidden"
+        initial={{ opacity: 0, visibility: 'hidden' }}
+        animate={{ 
+          opacity: isOpen ? 1 : 0,
+          visibility: isOpen ? 'visible' : 'hidden'
+        }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
         role="dialog"
         aria-modal="true"
         aria-label="Mobile navigation menu"
@@ -164,16 +165,26 @@ const Navigation = ({ isOpen, setIsOpen }) => {
                       ? 'bg-primary-light text-primary-dark shadow-xl'
                       : 'text-white hover:bg-white/10'
                   }`}
-                  whileHover={{ scale: 1.05, x: 10 }}
+                  whileHover={{ scale: 1.05, x: 10, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: 0.3 + index * 0.1 }}
+                  initial={{ x: -50, opacity: 0, y: 20 }}
+                  animate={{ x: 0, opacity: 1, y: 0 }}
+                  transition={{ 
+                    duration: 0.4, 
+                    delay: 0.3 + index * 0.1,
+                    ease: "easeOut"
+                  }}
                   role="menuitem"
                   aria-current={activeSection === item.href.substring(1) ? 'page' : undefined}
                   aria-label={`Navigate to ${item.name} section`}
                 >
-                  <span className="text-lg sm:text-xl">{item.icon}</span>
+                  <motion.span 
+                    className="text-lg sm:text-xl"
+                    whileHover={{ rotate: 5, scale: 1.1 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {item.icon}
+                  </motion.span>
                   <span className="font-semibold">{item.name}</span>
                 </motion.button>
               ))}

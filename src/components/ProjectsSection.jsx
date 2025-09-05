@@ -1,6 +1,5 @@
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { useState, useRef } from 'react'
-import useSoundEffects from '../hooks/useSoundEffects'
 // import { FlipCard, RippleButton, MagneticButton } from './MicroInteractions'
 // import { TextReveal, GradientText } from './AnimatedText'
 import { 
@@ -31,7 +30,6 @@ const ProjectsSection = () => {
   const [showGallery, setShowGallery] = useState(false)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const sectionRef = useRef(null)
-  const { playSound } = useSoundEffects()
   
   // Scroll-based animations
   const { scrollYProgress } = useScroll({
@@ -65,7 +63,7 @@ const ProjectsSection = () => {
       image: "https://i.pinimg.com/1200x/21/d6/01/21d60136d625e582e7709abb063d0844.jpg",
       category: "web",
       technologies: ["Laravel", "PHP", "MySQL", "JavaScript", "Bootstrap", "Postman", "RESTful API"],
-      github: "https://github.com/gabandreas/hmsoft",
+      github: "https://github.com/gabandreas/HMSoft-Development-Front-Endbolehj",
       live: "https://hmsoft-to.pratamalink.com/",
       featured: true,
       stats: { stars: 12, forks: 3, views: 450 },
@@ -298,9 +296,7 @@ const ProjectsSection = () => {
                   transformStyle: "preserve-3d",
                   perspective: "1000px"
                 }}
-                onHoverStart={() => playSound('cardHover')}
                 onClick={() => {
-                  playSound('cardClick')
                   setSelectedProject(project)
                 }}
               >
@@ -443,20 +439,22 @@ const ProjectsSection = () => {
         </AnimatePresence>
 
         {/* Project Modal */}
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           {selectedProject && (
             <motion.div
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] flex items-center justify-center p-4"
+              className="fixed inset-0 bg-black/60 backdrop-blur-md z-[100] flex items-center justify-center p-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
               onClick={() => setSelectedProject(null)}
             >
               <motion.div
-                className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.8, opacity: 0 }}
+                className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+                initial={{ scale: 0.7, opacity: 0, y: 50 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.7, opacity: 0, y: 50 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="relative">
@@ -558,20 +556,22 @@ const ProjectsSection = () => {
         </AnimatePresence>
 
         {/* Gallery Popup */}
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           {showGallery && selectedProject && (
             <motion.div
-              className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm"
+              className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-md"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
               onClick={() => setShowGallery(false)}
             >
               <motion.div
-                className="relative max-w-4xl max-h-[90vh] w-full mx-4"
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.8, opacity: 0 }}
+                className="relative max-w-5xl max-h-[90vh] w-full mx-4"
+                initial={{ scale: 0.6, opacity: 0, y: 30 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.6, opacity: 0, y: 30 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Close Button */}
@@ -590,45 +590,62 @@ const ProjectsSection = () => {
                     key={currentImageIndex}
                     src={selectedProject.gallery[currentImageIndex]}
                     alt={`${selectedProject.title} - Gallery image ${currentImageIndex + 1}`}
-                    className="w-full h-auto max-h-[70vh] object-contain rounded-lg"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.3 }}
+                    className="w-full h-auto max-h-[70vh] object-contain rounded-lg shadow-2xl"
+                    initial={{ opacity: 0, scale: 0.8, x: 20 }}
+                    animate={{ opacity: 1, scale: 1, x: 0 }}
+                    exit={{ opacity: 0, scale: 0.8, x: -20 }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
                     loading="lazy"
                     decoding="async"
                   />
 
                   {/* Navigation Arrows */}
                   <motion.button
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 text-white p-3 rounded-full hover:bg-white/30 transition-colors cursor-hover"
+                    className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 backdrop-blur-sm text-white p-3 rounded-full hover:bg-white/30 transition-all duration-300 cursor-hover shadow-lg"
                     onClick={prevImage}
-                    whileHover={{ scale: 1.1 }}
+                    whileHover={{ scale: 1.1, x: -2 }}
                     whileTap={{ scale: 0.9 }}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: 0.2 }}
                   >
                     <ChevronLeft className="w-6 h-6" />
                   </motion.button>
 
                   <motion.button
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 text-white p-3 rounded-full hover:bg-white/30 transition-colors cursor-hover"
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 backdrop-blur-sm text-white p-3 rounded-full hover:bg-white/30 transition-all duration-300 cursor-hover shadow-lg"
                     onClick={nextImage}
-                    whileHover={{ scale: 1.1 }}
+                    whileHover={{ scale: 1.1, x: 2 }}
                     whileTap={{ scale: 0.9 }}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: 0.2 }}
                   >
                     <ChevronRight className="w-6 h-6" />
                   </motion.button>
                 </div>
 
                 {/* Thumbnail Strip */}
-                <div className="flex space-x-2 mt-4 overflow-x-auto pb-2">
+                <motion.div 
+                  className="flex space-x-2 mt-4 overflow-x-auto pb-2"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.3 }}
+                >
                   {selectedProject.gallery.map((image, index) => (
                     <motion.button
                       key={index}
                       onClick={() => setCurrentImageIndex(index)}
-                      className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden cursor-hover ${
-                        index === currentImageIndex ? 'ring-2 ring-white' : ''
+                      className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden cursor-hover transition-all duration-300 ${
+                        index === currentImageIndex 
+                          ? 'ring-2 ring-white shadow-lg scale-105' 
+                          : 'hover:scale-105 hover:shadow-md'
                       }`}
-                      whileHover={{ scale: 1.05 }}
+                      whileHover={{ scale: 1.05, y: -2 }}
                       whileTap={{ scale: 0.95 }}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3, delay: 0.4 + index * 0.05 }}
                     >
                       <img
                         src={image}
@@ -639,12 +656,17 @@ const ProjectsSection = () => {
                       />
                     </motion.button>
                   ))}
-                </div>
+                </motion.div>
 
                 {/* Image Counter */}
-                <div className="text-center mt-2 text-white/80 text-sm">
+                <motion.div 
+                  className="text-center mt-2 text-white/80 text-sm"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3, delay: 0.5 }}
+                >
                   {currentImageIndex + 1} / {selectedProject.gallery.length}
-                </div>
+                </motion.div>
               </motion.div>
             </motion.div>
           )}

@@ -217,7 +217,7 @@ const HobbiesSection = () => {
 
           {/* Hobby Details */}
           <motion.div
-            className="lg:col-span-2"
+            className="lg:col-span-2 text-left"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -236,9 +236,9 @@ const HobbiesSection = () => {
                   <div className={`w-16 h-16 ${currentHobby.color} rounded-2xl flex items-center justify-center text-white flex-shrink-0`}>
                     {currentHobby.icon}
                   </div>
-                  <div className="flex-1">
+                  <div className="flex-1 text-left self-start">
                     <h3 className="text-2xl font-bold text-primary-dark mb-3">{currentHobby.title}</h3>
-                    <p className="text-primary-dark/80 leading-relaxed text-base">{currentHobby.description}</p>
+                    <p className="text-base text-primary-dark/80 leading-relaxed !text-left">{currentHobby.description}</p>
                   </div>
                 </div>
               </div>
@@ -246,16 +246,16 @@ const HobbiesSection = () => {
               {/* Details Grid */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
                 <div className="space-y-4">
-                  <h4 className="font-semibold text-primary-dark text-lg flex items-center space-x-2">
+                  <h4 className="font-semibold text-primary-dark text-lg flex items-center space-x-2 text-left">
                     <Target className="w-5 h-5" />
                     <span>Details</span>
                   </h4>
                   <div className="space-y-3">
                     {Object.entries(currentHobby.details).map(([key, value]) => (
                       <div key={key} className="p-4 bg-primary-dark/5 rounded-lg border border-primary-dark/10">
-                        <div className="flex flex-col space-y-2">
-                          <span className="text-primary-dark/70 capitalize font-semibold text-sm">{key}:</span>
-                          <span className="text-primary-dark font-medium text-sm leading-relaxed">{value}</span>
+                        <div className="flex flex-col space-y-2 text-left">
+                          <span className="text-primary-dark/70 capitalize font-semibold text-sm text-left">{key}:</span>
+                          <span className="text-primary-dark font-medium text-sm leading-relaxed text-left">{value}</span>
                         </div>
                       </div>
                     ))}
@@ -263,7 +263,7 @@ const HobbiesSection = () => {
                 </div>
 
                 <div className="space-y-4">
-                  <h4 className="font-semibold text-primary-dark text-lg flex items-center space-x-2">
+                  <h4 className="font-semibold text-primary-dark text-lg flex items-center space-x-2 text-left">
                     <Star className="w-5 h-5" />
                     <span>Favorites</span>
                   </h4>
@@ -272,9 +272,9 @@ const HobbiesSection = () => {
                       <div key={index} className="p-4 bg-primary-light/10 rounded-lg border border-primary-light/20">
                         <div className="flex items-start space-x-3">
                           <div className="w-2 h-2 bg-primary-light rounded-full mt-2 flex-shrink-0"></div>
-                          <div className="flex-1">
-                            <span className="text-primary-dark font-semibold text-sm block mb-1">{favorite.name}</span>
-                            <span className="text-primary-dark/60 text-xs leading-relaxed">{favorite.reason}</span>
+                          <div className="flex-1 text-left">
+                            <span className="text-primary-dark font-semibold text-sm block mb-1 text-left">{favorite.name}</span>
+                            <span className="text-primary-dark/60 text-xs leading-relaxed text-left">{favorite.reason}</span>
                           </div>
                         </div>
                       </div>
@@ -285,7 +285,7 @@ const HobbiesSection = () => {
 
               {/* Achievements */}
               <div className="mb-8">
-                <h4 className="font-semibold text-primary-dark text-lg mb-4 flex items-center space-x-2">
+                <h4 className="font-semibold text-primary-dark text-lg mb-4 flex items-center space-x-2 text-left">
                   <Award className="w-5 h-5" />
                   <span>Achievements</span>
                 </h4>
@@ -299,7 +299,7 @@ const HobbiesSection = () => {
                       transition={{ duration: 0.5, delay: index * 0.1 }}
                     >
                       <Sparkles className="w-4 h-4 text-primary-light flex-shrink-0 mt-0.5" />
-                      <span className="text-primary-dark font-medium text-sm leading-relaxed">{achievement}</span>
+                      <span className="text-primary-dark font-medium text-sm leading-relaxed text-left">{achievement}</span>
                     </motion.div>
                   ))}
                 </div>
@@ -307,11 +307,11 @@ const HobbiesSection = () => {
 
               {/* Current Project */}
               <div className="bg-gradient-to-r from-primary-dark/5 to-primary-light/10 p-6 rounded-xl border border-primary-dark/10">
-                <h4 className="font-semibold text-primary-dark text-lg mb-3 flex items-center space-x-2">
+                <h4 className="font-semibold text-primary-dark text-lg mb-3 flex items-center space-x-2 text-left">
                   <Zap className="w-5 h-5" />
                   <span>Current Project</span>
                 </h4>
-                <p className="text-primary-dark/80 leading-relaxed">{currentHobby.currentProject}</p>
+                <p className="text-primary-dark/80 leading-relaxed text-left">{currentHobby.currentProject}</p>
               </div>
             </motion.div>
           </motion.div>
