@@ -57,12 +57,6 @@ const ThemeSwitcher = () => {
     }
   ]
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('portfolio-theme') || 'light'
-    setCurrentTheme(savedTheme)
-    applyTheme(savedTheme)
-  }, [])
-
   const applyTheme = (themeId) => {
     const theme = themes.find(t => t.id === themeId)
     if (!theme) return
@@ -89,6 +83,12 @@ const ThemeSwitcher = () => {
       text: theme.colors.text
     })
   }
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('portfolio-theme') || 'light'
+    setCurrentTheme(savedTheme)
+    applyTheme(savedTheme)
+  }, [applyTheme])
 
   const handleThemeChange = (themeId) => {
     setCurrentTheme(themeId)

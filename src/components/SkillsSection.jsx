@@ -149,8 +149,8 @@ const SkillsSection = () => {
     <motion.section 
       ref={sectionRef}
       id="skills"
-      className="py-20 relative overflow-hidden"
-      style={{ y, opacity, scale, rotate }}
+      className="py-16 sm:py-20 relative overflow-hidden"
+      style={{ y, opacity, scale }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1.5, ease: "easeOut" }}
@@ -184,7 +184,7 @@ const SkillsSection = () => {
         />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-6xl">
         <motion.div 
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
@@ -339,7 +339,16 @@ const SkillsSection = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   whileHover={{ scale: 1.02, y: -2 }}
-                  onClick={() => setSelectedCertificate(cert)}
+                  onClick={() => {
+                    setSelectedCertificate(cert)
+                    // Auto-scroll to certificate modal when it opens
+                    setTimeout(() => {
+                      const modal = document.querySelector('.certificate-detail-modal')
+                      if (modal) {
+                        modal.scrollIntoView({ behavior: 'smooth', block: 'center' })
+                      }
+                    }, 200)
+                  }}
                 >
                   <div className="flex items-start space-x-4">
                     <div className="w-12 h-12 bg-primary-dark rounded-lg flex items-center justify-center text-white flex-shrink-0">
@@ -386,6 +395,13 @@ const SkillsSection = () => {
                         onClick={(e) => {
                           e.stopPropagation()
                           setSelectedCertificate(cert)
+                          // Auto-scroll to certificate modal when it opens
+                          setTimeout(() => {
+                            const modal = document.querySelector('.certificate-detail-modal')
+                            if (modal) {
+                              modal.scrollIntoView({ behavior: 'smooth', block: 'center' })
+                            }
+                          }, 200)
                         }}
                         title="View Certificate"
                       >
@@ -398,10 +414,19 @@ const SkillsSection = () => {
             </div>
 
             <motion.button
-              className="w-full py-3 px-4 bg-primary-dark text-white rounded-xl hover:bg-primary-light transition-all duration-300 font-semibold flex items-center justify-center space-x-2"
+              className="w-full py-3 px-4 bg-primary-dark text-white rounded-xl hover:shadow-lg hover:shadow-secondary-dark/30 transition-all duration-300 font-semibold flex items-center justify-center space-x-2"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              onClick={() => setShowCertificates(true)}
+              onClick={() => {
+                setShowCertificates(true)
+                // Auto-scroll to certificates modal when it opens
+                setTimeout(() => {
+                  const modal = document.querySelector('.all-certificates-modal')
+                  if (modal) {
+                    modal.scrollIntoView({ behavior: 'smooth', block: 'center' })
+                  }
+                }, 200)
+              }}
             >
               <Award className="w-5 h-5" />
               <span>View All Certificates</span>
@@ -413,7 +438,7 @@ const SkillsSection = () => {
         {/* Certificate Modal */}
         {selectedCertificate && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            className="certificate-detail-modal fixed inset-0 z-[1000] flex items-center justify-center p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -501,7 +526,7 @@ const SkillsSection = () => {
         {/* All Certificates Modal */}
         {showCertificates && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            className="all-certificates-modal fixed inset-0 z-[1000] flex items-center justify-center p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -541,6 +566,13 @@ const SkillsSection = () => {
                       onClick={() => {
                         setShowCertificates(false)
                         setSelectedCertificate(cert)
+                        // Auto-scroll to certificate modal when it opens
+                        setTimeout(() => {
+                          const modal = document.querySelector('.certificate-detail-modal')
+                          if (modal) {
+                            modal.scrollIntoView({ behavior: 'smooth', block: 'center' })
+                          }
+                        }, 200)
                       }}
                     >
                       <div className="aspect-video rounded-lg mb-4 overflow-hidden">

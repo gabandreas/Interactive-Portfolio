@@ -118,7 +118,7 @@ const CustomCursor = () => {
       {/* Main cursor */}
       <div
         ref={cursorRef}
-        className={`fixed pointer-events-none z-[9999] transition-all duration-300 ${
+        className={`fixed pointer-events-none z-[1500] transition-all duration-300 ${
           isHovering 
             ? cursorType === 'button' 
               ? 'w-12 h-12 bg-primary-light/30 border-2 border-primary-light' 
@@ -143,7 +143,7 @@ const CustomCursor = () => {
       {/* Cursor ring */}
       <div
         ref={ringRef}
-        className="fixed pointer-events-none z-[9998] w-20 h-20 border border-primary-dark/20 rounded-full transition-all duration-300"
+        className="fixed pointer-events-none z-[1400] w-20 h-20 border border-primary-dark/20 rounded-full transition-all duration-300"
         style={{
           opacity: isVisible ? 1 : 0,
           transform: 'translate(-50%, -50%)',

@@ -163,46 +163,41 @@ const Footer = () => {
         ))}
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-6xl">
         {/* Main Footer Content */}
-        <div className="py-16">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="py-12 sm:py-16">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Brand Section */}
             <motion.div
-              className="lg:col-span-1"
+              className="sm:col-span-2 lg:col-span-1"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="w-12 h-12 bg-primary-light rounded-xl flex items-center justify-center">
-                  <span className="text-primary-dark font-bold text-xl">GA</span>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-primary-light rounded-lg flex items-center justify-center">
+                  <span className="text-primary-dark font-bold text-lg">GA</span>
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold">Gabriel Andreas</h3>
+                  <h3 className="text-xl font-bold">Gabriel Andreas</h3>
                   <p className="text-white/70 text-sm">Junior Web Developer</p>
                 </div>
               </div>
               
               <p className="text-white/80 mb-6 leading-relaxed">
-                Creating digital experiences that combine beautiful design with powerful functionality. 
-                Always learning, always building.
+                Creating digital experiences that combine beautiful design with powerful functionality.
               </p>
 
               {/* Contact Info */}
               <div className="space-y-2 text-sm text-white/70">
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center gap-2">
                   <MapPin className="w-4 h-4" />
                   <span>Jakarta, Indonesia</span>
                 </div>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center gap-2">
                   <Mail className="w-4 h-4" />
                   <span>gabandreas32@gmail.com</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Phone className="w-4 h-4" />
-                  <span>+62 (812) 93386168</span>
                 </div>
               </div>
             </motion.div>
@@ -214,19 +209,18 @@ const Footer = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.1 }}
             >
-              <h4 className="text-lg font-semibold mb-6 flex items-center space-x-2">
-                <Zap className="w-5 h-5" />
+              <h4 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                <Zap className="w-4 h-4" />
                 <span>Quick Links</span>
               </h4>
-              <ul className="space-y-3">
+              <ul className="space-y-2">
                 {quickLinks.map((link) => (
                   <li key={link.name}>
                     <a
                       href={link.href}
-                      className="text-white/70 hover:text-primary-light transition-colors duration-300 flex items-center space-x-2 group"
+                      className="text-white/70 hover:text-primary-light transition-colors duration-300"
                     >
-                      <span>{link.name}</span>
-                      <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      {link.name}
                     </a>
                   </li>
                 ))}
@@ -240,100 +234,85 @@ const Footer = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <h4 className="text-lg font-semibold mb-6 flex items-center space-x-2">
-                <Code className="w-5 h-5" />
+              <h4 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                <Code className="w-4 h-4" />
                 <span>Tech Stack</span>
               </h4>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-2">
                 {techStack.map((tech) => (
                   <div
                     key={tech.name}
-                    className="flex items-center space-x-2 text-white/70 hover:text-primary-light transition-colors duration-300 group cursor-pointer"
+                    className="flex items-center gap-2 text-white/70 hover:text-primary-light transition-colors duration-300"
                   >
-                    <span className="group-hover:scale-110 transition-transform duration-300">{tech.icon}</span>
+                    {tech.icon}
                     <span className="text-sm">{tech.name}</span>
                   </div>
                 ))}
               </div>
             </motion.div>
 
-            {/* Social & Stats */}
+            {/* Social Links */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.3 }}
             >
-              <h4 className="text-lg font-semibold mb-6 flex items-center space-x-2">
-                <Heart className="w-5 h-5" />
+              <h4 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                <Heart className="w-4 h-4" />
                 <span>Connect</span>
               </h4>
               
-              <div className="space-y-4">
-                {socialLinks.map((social, index) => (
+              <div className="flex gap-3">
+                {socialLinks.slice(0, 3).map((social, index) => (
                   <motion.a
                     key={social.label}
                     href={social.href}
-                    className="flex items-center space-x-3 p-3 bg-white/10 backdrop-blur-sm rounded-lg hover:bg-white/20 transition-all duration-300 group"
-                    whileHover={{ scale: 1.02, x: 5 }}
-                    whileTap={{ scale: 0.98 }}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    className="p-3 bg-white/10 backdrop-blur-sm rounded-lg hover:bg-white/20 transition-all duration-300"
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
                   >
-                    <div className={`p-2 rounded-lg bg-white/20 group-hover:bg-white/30 transition-colors duration-300 ${social.color}`}>
-                      {social.icon}
-                    </div>
-                    <div className="flex-1">
-                      <p className="font-medium">{social.label}</p>
-                      <p className="text-xs text-white/60">{social.stats}</p>
-                    </div>
-                    <ExternalLink className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    {social.icon}
                   </motion.a>
                 ))}
               </div>
             </motion.div>
           </div>
 
-          {/* Newsletter Signup */}
+          {/* Thank You Section */}
           <motion.div
-            className="mt-12 p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20"
+            className="mt-8 p-6 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <div className="text-center">
-              <motion.div
-                className="mb-6"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-              >
-                <h4 className="text-2xl font-bold mb-4 flex items-center justify-center space-x-2">
-                  <Zap className="w-6 h-6 text-yellow-400" />
-                  <span>Thank You!</span>
-                </h4>
-                <TypingAnimation />
-              </motion.div>
+              <h4 className="text-xl font-bold mb-4 flex items-center justify-center gap-2">
+                <Zap className="w-5 h-5 text-yellow-400" />
+                <span>Thank You!</span>
+              </h4>
+              <TypingAnimation />
             </div>
           </motion.div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/20 py-8">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="flex items-center space-x-2 text-white/70">
-              <span>© 2025 Gabriel Andreas. Made by</span>
+        <div className="border-t border-white/20 py-6">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div className="flex items-center gap-2 text-white/70 text-sm">
+              <span>© 2025 Gabriel Andreas. Made with</span>
               <motion.div
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 1, repeat: Infinity }}
               >
                 <Heart className="w-4 h-4 text-red-400" />
               </motion.div>
-              <span>and lots of</span>
+              <span>and</span>
               <motion.div
                 animate={{ rotate: [0, 10, -10, 0] }}
                 transition={{ duration: 2, repeat: Infinity }}
@@ -342,10 +321,9 @@ const Footer = () => {
               </motion.div>
             </div>
 
-            <div className="flex items-center space-x-6 text-sm text-white/70">
-              <a href="#" className="hover:text-primary-light transition-colors duration-300">Privacy Policy</a>
-              <a href="#" className="hover:text-primary-light transition-colors duration-300">Terms of Service</a>
-              <a href="#" className="hover:text-primary-light transition-colors duration-300">Sitemap</a>
+            <div className="flex items-center gap-4 text-sm text-white/70">
+              <a href="#" className="hover:text-primary-light transition-colors duration-300">Privacy</a>
+              <a href="#" className="hover:text-primary-light transition-colors duration-300">Terms</a>
             </div>
           </div>
         </div>

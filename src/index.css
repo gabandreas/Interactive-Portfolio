@@ -46,6 +46,52 @@ body {
   transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
 }
 
+/* Responsive Spacing System */
+.section-padding {
+  @apply py-16 sm:py-20;
+}
+
+.container-spacing {
+  @apply px-4 sm:px-6 lg:px-8;
+}
+
+.content-spacing {
+  @apply space-y-6 sm:space-y-8;
+}
+
+.grid-spacing {
+  @apply gap-6 sm:gap-8 lg:gap-12;
+}
+
+.card-spacing {
+  @apply p-4 sm:p-6 lg:p-8;
+}
+
+.text-spacing {
+  @apply mb-4 sm:mb-6;
+}
+
+/* Responsive Component Utilities */
+.btn-primary {
+  @apply px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-all duration-300;
+}
+
+.btn-secondary {
+  @apply px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold border-2 transition-all duration-300;
+}
+
+.input-field {
+  @apply w-full px-4 py-3 rounded-lg border focus:outline-none transition-colors duration-300;
+}
+
+.card-base {
+  @apply rounded-xl shadow-lg transition-all duration-300;
+}
+
+.glass-card-responsive {
+  @apply bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl p-4 sm:p-6;
+}
+
 /* Custom utility classes */
 .perspective-1000 {
   perspective: 1000px;
@@ -771,10 +817,11 @@ body {
 
 /* Force theme sunset colors when sunset theme is active */
 [data-theme="sunset"] {
-  --primary-dark: #E62727 !important;
-  --primary-light: #EF7722 !important;
-  --theme-bg: #EF7722 !important;
-  --theme-text: #E62727 !important;
+  --primary-dark: #FA1E0E !important;
+  --primary-light: #F7FD04 !important;
+  --secondary-dark: #F7FD04 !important;
+  --theme-bg: #FA1E0E !important;
+  --theme-text: #F7FD04 !important;
 }
 
 /* Force sunset theme colors for all elements */
@@ -783,31 +830,34 @@ body {
 }
 
 [data-theme="sunset"] .text-primary-dark {
-  color: #E62727 !important;
+  color: #F7FD04 !important;
 }
 
 [data-theme="sunset"] .text-primary-light {
-  color: #EF7722 !important;
+  color: #FA1E0E !important;
 }
 
 [data-theme="sunset"] .bg-primary-dark {
-  background-color: #E62727 !important;
+  background-color: #FA1E0E !important;
+  color: #F7FD04 !important;
 }
 
 [data-theme="sunset"] .bg-primary-light {
-  background-color: #EF7722 !important;
+  background-color: #F7FD04 !important;
+  color: #FA1E0E !important;
 }
 
 [data-theme="sunset"] .hover\:text-primary-light:hover {
-  color: #EF7722 !important;
+  color: #FA1E0E !important;
 }
 
 [data-theme="sunset"] .hover\:bg-primary-light:hover {
-  background-color: #EF7722 !important;
+  background-color: #F7FD04 !important;
+  color: #FA1E0E !important;
 }
 
 [data-theme="sunset"] .group-hover\:text-primary-light:hover {
-  color: #EF7722 !important;
+  color: #FA1E0E !important;
 }
 
 /* Force sunset theme for specific hero section elements */
@@ -817,60 +867,63 @@ body {
 [data-theme="sunset"] p,
 [data-theme="sunset"] span,
 [data-theme="sunset"] div {
-  color: #E62727 !important;
+  color: #F7FD04 !important;
 }
 
 [data-theme="sunset"] .text-primary-dark\/80 {
-  color: rgba(230, 39, 39, 0.8) !important;
+  color: rgba(247, 253, 4, 0.8) !important;
 }
 
 [data-theme="sunset"] .text-primary-dark\/70 {
-  color: rgba(230, 39, 39, 0.7) !important;
+  color: rgba(247, 253, 4, 0.7) !important;
 }
 
 [data-theme="sunset"] .text-primary-dark\/60 {
-  color: rgba(230, 39, 39, 0.6) !important;
+  color: rgba(247, 253, 4, 0.6) !important;
 }
 
 [data-theme="sunset"] .text-primary-dark\/50 {
-  color: rgba(230, 39, 39, 0.5) !important;
+  color: rgba(247, 253, 4, 0.5) !important;
 }
 
 /* Force dark theme colors when dark theme is active */
 [data-theme="dark"] {
   --primary-dark: #000000 !important;
-  --primary-light: #44444E !important;
+  --primary-light: #37353E !important;
   --secondary-dark: #37353E !important;
-  --theme-bg: #0f0f0f !important;
-  --theme-text: #000000 !important;
+  --theme-bg: #000000 !important;
+  --theme-text: #37353E !important;
 }
 
 [data-theme="dark"] .text-primary-dark {
-  color: #000000 !important;
+  color: #37353E !important;
 }
 
 [data-theme="dark"] .text-primary-light {
-  color: #44444E !important;
+  color: #000000 !important;
 }
 
 [data-theme="dark"] .bg-primary-dark {
-  background-color: #f1f5f9 !important;
+  background-color: #000000 !important;
+  color: #37353E !important;
 }
 
 [data-theme="dark"] .bg-primary-light {
-  background-color: #44444E !important;
+  background-color: #37353E !important;
+  color: #000000 !important;
 }
 
 [data-theme="dark"] .hover\:text-primary-light:hover {
-  color: #44444E !important;
+  color: #000000 !important;
 }
 
 [data-theme="dark"] .hover\:bg-primary-light:hover {
-  background-color: #44444E !important;
+  background-color: #37353E !important;
+  color: #000000 !important;
 }
 
 [data-theme="dark"] .group-hover\:text-primary-light:hover {
-  color: #44444E !important;
+  color: #000000 !important;
 }
 
 /* Dark theme border and card colors */
@@ -896,97 +949,110 @@ body {
 
 /* Dark theme background overrides for better contrast */
 [data-theme="dark"] .glass-card {
-  background-color: #37353E !important;
-  border-color: #44444E !important;
+  background-color: #000000 !important;
+  border-color: rgba(55, 53, 62, 0.2) !important;
+  color: #37353E !important;
 }
 
 [data-theme="dark"] .bg-white\/90 {
-  background-color: #37353E !important;
+  background-color: #000000 !important;
+  color: #37353E !important;
 }
 
 [data-theme="dark"] .bg-white\/80 {
-  background-color: #37353E !important;
+  background-color: #000000 !important;
+  color: #37353E !important;
 }
 
 [data-theme="dark"] .bg-white\/10 {
-  background-color: rgba(55, 53, 62, 0.1) !important;
+  background-color: rgba(0, 0, 0, 0.1) !important;
 }
 
 [data-theme="dark"] .bg-white\/20 {
-  background-color: rgba(55, 53, 62, 0.2) !important;
+  background-color: rgba(0, 0, 0, 0.2) !important;
 }
 
 [data-theme="dark"] .bg-white\/30 {
-  background-color: rgba(55, 53, 62, 0.3) !important;
+  background-color: rgba(0, 0, 0, 0.3) !important;
 }
 
 [data-theme="dark"] .bg-white\/50 {
-  background-color: rgba(55, 53, 62, 0.5) !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
 [data-theme="dark"] .bg-white\/70 {
-  background-color: rgba(55, 53, 62, 0.7) !important;
+  background-color: rgba(0, 0, 0, 0.7) !important;
 }
 
 /* Dark theme button backgrounds */
 [data-theme="dark"] .bg-primary-dark {
-  background-color: #37353E !important;
-  color: #f1f5f9 !important;
+  background-color: #000000 !important;
+  color: #37353E !important;
 }
 
 [data-theme="dark"] .hover\:bg-primary-light:hover {
-  background-color: #44444E !important;
+  background-color: #37353E !important;
+  color: #000000 !important;
 }
 
 [data-theme="dark"] .hover\:bg-secondary-dark:hover {
-  background-color: #44444E !important;
+  background-color: #37353E !important;
+  color: #000000 !important;
 }
 
 /* Dark theme specific element overrides */
 [data-theme="dark"] .backdrop-blur-sm {
-  background-color: #37353E !important;
+  background-color: #000000 !important;
+  color: #37353E !important;
 }
 
 [data-theme="dark"] .backdrop-blur-lg {
-  background-color: #37353E !important;
+  background-color: #000000 !important;
+  color: #37353E !important;
 }
 
 [data-theme="dark"] .backdrop-blur-xl {
-  background-color: #37353E !important;
+  background-color: #000000 !important;
+  color: #37353E !important;
 }
 
 [data-theme="dark"] .backdrop-blur-2xl {
-  background-color: #37353E !important;
+  background-color: #000000 !important;
+  color: #37353E !important;
 }
 
 /* Dark theme card and container backgrounds */
 [data-theme="dark"] .bg-white {
-  background-color: #37353E !important;
+  background-color: #000000 !important;
+  color: #37353E !important;
 }
 
 [data-theme="dark"] .bg-gray-50 {
-  background-color: #37353E !important;
+  background-color: #000000 !important;
+  color: #37353E !important;
 }
 
 [data-theme="dark"] .bg-gray-100 {
-  background-color: #37353E !important;
+  background-color: #000000 !important;
+  color: #37353E !important;
 }
 
 [data-theme="dark"] .bg-gray-200 {
-  background-color: #44444E !important;
+  background-color: #000000 !important;
+  color: #37353E !important;
 }
 
 /* Dark theme text contrast fixes */
 [data-theme="dark"] .text-gray-800 {
-  color: #000000 !important;
+  color: #37353E !important;
 }
 
 [data-theme="dark"] .text-gray-700 {
-  color: #000000 !important;
+  color: #37353E !important;
 }
 
 [data-theme="dark"] .text-gray-600 {
-  color: #000000 !important;
+  color: #37353E !important;
 }
 
 [data-theme="dark"] .text-gray-500 {
@@ -997,7 +1063,7 @@ body {
   color: #000000 !important;
 }
 
-/* Force all text to be black in dark theme */
+/* Force all text to be gray in dark theme */
 [data-theme="dark"] h1,
 [data-theme="dark"] h2,
 [data-theme="dark"] h3,
@@ -1010,110 +1076,114 @@ body {
 [data-theme="dark"] a,
 [data-theme="dark"] button,
 [data-theme="dark"] label {
-  color: #000000 !important;
+  color: #37353E !important;
 }
 
 [data-theme="dark"] .text-primary-dark\/80 {
-  color: rgba(0, 0, 0, 0.8) !important;
+  color: rgba(55, 53, 62, 0.8) !important;
 }
 
 [data-theme="dark"] .text-primary-dark\/70 {
-  color: rgba(0, 0, 0, 0.7) !important;
+  color: rgba(55, 53, 62, 0.7) !important;
 }
 
 [data-theme="dark"] .text-primary-dark\/60 {
-  color: rgba(0, 0, 0, 0.6) !important;
+  color: rgba(55, 53, 62, 0.6) !important;
 }
 
 [data-theme="dark"] .text-primary-dark\/50 {
-  color: rgba(0, 0, 0, 0.5) !important;
+  color: rgba(55, 53, 62, 0.5) !important;
 }
 
 /* Dark theme icon colors */
 [data-theme="dark"] svg {
-  color: #000000 !important;
+  color: #37353E !important;
 }
 
 [data-theme="dark"] .text-primary-dark svg {
-  color: #000000 !important;
+  color: #37353E !important;
 }
 
 [data-theme="dark"] .text-primary-light svg {
-  color: #44444E !important;
+  color: #000000 !important;
 }
 
 [data-theme="dark"] .w-4.h-4 {
-  color: #000000 !important;
+  color: #37353E !important;
 }
 
 [data-theme="dark"] .w-5.h-5 {
-  color: #000000 !important;
+  color: #37353E !important;
 }
 
 [data-theme="dark"] .w-6.h-6 {
-  color: #000000 !important;
+  color: #37353E !important;
 }
 
 /* Dark theme progress bar colors - only the bar itself */
 [data-theme="dark"] .h-3.bg-primary-dark {
-  background-color: #000000 !important;
+  background-color: #37353E !important;
 }
 
 [data-theme="dark"] .h-1.bg-primary-dark {
-  background-color: #000000 !important;
+  background-color: #37353E !important;
 }
 
 [data-theme="dark"] .h-2.bg-primary-dark {
-  background-color: #000000 !important;
+  background-color: #37353E !important;
 }
 
 [data-theme="dark"] .rounded-full.bg-primary-dark {
-  background-color: #000000 !important;
+  background-color: #37353E !important;
 }
 
-/* Dark theme progress bar background - keep gray */
+/* Dark theme progress bar background - keep black */
 [data-theme="dark"] .bg-primary-light\/20 {
-  background-color: rgba(68, 68, 78, 0.2) !important;
+  background-color: rgba(0, 0, 0, 0.2) !important;
 }
 
 [data-theme="dark"] .bg-primary-light\/10 {
-  background-color: rgba(68, 68, 78, 0.1) !important;
+  background-color: rgba(0, 0, 0, 0.1) !important;
 }
 
 /* Force neon theme colors when neon theme is active */
 [data-theme="neon"] {
-  --primary-dark: #00ffff !important;
-  --primary-light: #ff00ff !important;
-  --theme-bg: #330066 !important;
-  --theme-text: #00ffff !important;
+  --primary-dark: #F7A5A5 !important;
+  --primary-light: #4DFFBE !important;
+  --secondary-dark: #4DFFBE !important;
+  --theme-bg: #F7A5A5 !important;
+  --theme-text: #4DFFBE !important;
 }
 
 [data-theme="neon"] .text-primary-dark {
-  color: #00ffff !important;
+  color: #4DFFBE !important;
 }
 
 [data-theme="neon"] .text-primary-light {
-  color: #ff00ff !important;
+  color: #F7A5A5 !important;
 }
 
 [data-theme="neon"] .bg-primary-dark {
-  background-color: #00ffff !important;
+  background-color: #F7A5A5 !important;
+  color: #4DFFBE !important;
 }
 
 [data-theme="neon"] .bg-primary-light {
-  background-color: #ff00ff !important;
+  background-color: #4DFFBE !important;
+  color: #F7A5A5 !important;
 }
 
 [data-theme="neon"] .hover\:text-primary-light:hover {
-  color: #ff00ff !important;
+  color: #F7A5A5 !important;
 }
 
 [data-theme="neon"] .hover\:bg-primary-light:hover {
-  background-color: #ff00ff !important;
+  background-color: #4DFFBE !important;
+  color: #F7A5A5 !important;
 }
 
 [data-theme="neon"] .group-hover\:text-primary-light:hover {
-  color: #ff00ff !important;
+  color: #F7A5A5 !important;
 }
 
 /* Theme CSS Classes */
