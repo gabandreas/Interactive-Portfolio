@@ -279,7 +279,7 @@ const IllustrationGallery = () => {
         <AnimatePresence>
           {selectedImage && (
             <motion.div
-              className="fixed inset-0 bg-black/95 backdrop-blur-md z-[1000] flex items-center justify-center p-4 sm:p-6"
+              className="fixed inset-0 bg-black/95 backdrop-blur-md z-[200] flex items-center justify-center p-4 sm:p-6"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}

@@ -298,13 +298,6 @@ const ProjectsSection = () => {
                 }}
                 onClick={() => {
                   setSelectedProject(project)
-                  // Auto-scroll to project modal when it opens
-                  setTimeout(() => {
-                    const modal = document.querySelector('.project-detail-modal')
-                    if (modal) {
-                      modal.scrollIntoView({ behavior: 'smooth', block: 'center' })
-                    }
-                  }, 200)
                 }}
               >
                 {/* Featured Badge */}
@@ -383,13 +376,6 @@ const ProjectsSection = () => {
                         onClick={(e) => {
                           e.stopPropagation()
                           setSelectedProject(project)
-                          // Auto-scroll to project modal when it opens
-                          setTimeout(() => {
-                            const modal = document.querySelector('.project-detail-modal')
-                            if (modal) {
-                              modal.scrollIntoView({ behavior: 'smooth', block: 'center' })
-                            }
-                          }, 200)
                         }}
                       >
                         <Eye className="w-5 h-5" />
@@ -456,7 +442,7 @@ const ProjectsSection = () => {
         <AnimatePresence mode="wait">
           {selectedProject && (
             <motion.div
-              className="project-detail-modal fixed inset-0 bg-black/60 backdrop-blur-md z-[1000] flex items-center justify-center p-4"
+              className="fixed inset-0 bg-black/60 backdrop-blur-md z-[100] flex items-center justify-center p-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -573,7 +559,7 @@ const ProjectsSection = () => {
         <AnimatePresence mode="wait">
           {showGallery && selectedProject && (
             <motion.div
-              className="fixed inset-0 z-[1100] flex items-center justify-center bg-black/95 backdrop-blur-md"
+              className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-md"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}

@@ -1,22 +1,26 @@
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { useState, useRef, useEffect } from 'react'
+import { TextReveal, GradientText, ParticleText } from './AnimatedText'
 import { 
   Code, 
+  Palette, 
   Database, 
+  Smartphone, 
   Globe, 
   Award, 
   Users, 
   Coffee,
   BookOpen,
+  Gamepad2,
   Camera,
   Music,
   Heart,
   ChevronRight,
+  Download,
   ExternalLink,
   GraduationCap,
   Briefcase,
   BookOpenText,
-  Download,
   Github,
   Calendar,
   Star,
@@ -818,8 +822,8 @@ Visit @{githubStats?.login || 'gabandreas'}
     <motion.section 
       ref={sectionRef}
       id="about"
-      className="py-16 sm:py-20 relative overflow-hidden"
-      style={{ y, opacity, scale }}
+      className="py-20 relative overflow-hidden"
+      style={{ y, opacity, scale, rotate }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1.5, ease: "easeOut" }}
@@ -872,24 +876,43 @@ Visit @{githubStats?.login || 'gabandreas'}
         />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-6xl">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 relative z-10">
         <motion.div 
-          className="text-center mb-12 sm:mb-16"
-          initial={{ opacity: 0, y: 30 }}
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ 
+            duration: 0.8, 
+            ease: "easeOut",
+            delay: 0.2
+          }}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary-dark mb-4 sm:mb-6">
-            About Me
-          </h2>
-          <div className="w-16 sm:w-24 h-1 bg-primary-dark mx-auto rounded-full mb-4" />
-          <p className="text-base sm:text-lg text-primary-dark/80 max-w-2xl mx-auto leading-relaxed">
-            Get to know more about my journey, interests, and passion for web development.
-          </p>
+          <TextReveal delay={0.3} direction="up">
+            <ParticleText 
+              text="About Me" 
+              className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary-dark mb-6 block"
+            />
+          </TextReveal>
+          <motion.div 
+            className="w-24 h-1 bg-primary-dark mx-auto rounded-full"
+            initial={{ width: 0 }}
+            whileInView={{ width: 96 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+          />
+          <motion.p 
+            className="text-lg text-primary-dark/70 mt-4 max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+          >
+            A glimpse into my journey
+          </motion.p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-start">
           {/* Profile Section */}
           <motion.div
             className="space-y-4 sm:space-y-6 lg:space-y-8"
@@ -899,88 +922,82 @@ Visit @{githubStats?.login || 'gabandreas'}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             {/* Profile Card */}
-            <div className="glass-card rounded-xl p-6 depth-3">
-              <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6 mb-6">
-                <div className="relative">
-                  <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden ring-2 ring-primary-dark/20">
+            <div className="glass-card rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 depth-3">
+              <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6 mb-4 sm:mb-6">
+                <div className="relative group">
+                  <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden neumorphism ring-2 ring-primary-dark/20 group-hover:ring-primary-dark/40 transition-all duration-300">
                     <img 
                       src="https://media.licdn.com/dms/image/v2/D4E03AQGJNZaMuR7q9Q/profile-displayphoto-scale_400_400/B4EZkVFNOhIsAo-/0/1756995311896?e=1759968000&v=beta&t=6xhW8_v0Hqi--uJ752O5cYNL_7LQBNmAz7HyNqfT1m0" 
                       alt="Profile" 
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                     />
                   </div>
-                  <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-white">
-                    <div className="w-2 h-2 bg-white rounded-full m-1"></div>
+                  <div className="absolute -bottom-1 -right-1 sm:-bottom-2 sm:-right-2 w-6 h-6 sm:w-8 sm:h-8 bg-green-500 rounded-full border-2 sm:border-4 border-white flex items-center justify-center shadow-lg">
+                    <div className="w-2 h-2 sm:w-3 sm:h-3 bg-white rounded-full"></div>
                   </div>
                 </div>
                 <div className="text-center sm:text-left">
-                  <h3 className="text-xl font-bold text-primary-dark">Gabriel Andreas</h3>
-                  <p className="text-primary-dark/70">Junior Web Developer</p>
-                  <div className="flex flex-wrap justify-center sm:justify-start gap-2 mt-2">
-                    <span className="px-3 py-1 bg-primary-light/30 text-primary-dark rounded-full text-sm font-medium">Available</span>
-                    <span className="px-3 py-1 bg-primary-dark/10 text-primary-dark rounded-full text-sm font-medium">Remote</span>
+                  <h3 className="text-xl sm:text-2xl font-bold text-primary-dark">Gabriel Andreas</h3>
+                  <p className="text-primary-dark/70 text-sm sm:text-base">Junior Web Developer</p>
+                  <div className="flex flex-wrap justify-center sm:justify-start space-x-2 mt-2">
+                    <span className="px-2 py-1 sm:px-3 sm:py-1 bg-primary-light/30 text-primary-dark rounded-full text-xs sm:text-sm font-medium">Available</span>
+                    <span className="px-2 py-1 sm:px-3 sm:py-1 bg-primary-dark/10 text-primary-dark rounded-full text-xs sm:text-sm font-medium">Remote</span>
                   </div>
                 </div>
               </div>
               
               <div className="space-y-4">
-                <p className="text-primary-dark/80 leading-relaxed">
-                  I am a fresh graduate in Information Technology with a focus on web development. 
-                  I have hands-on experience with Laravel during my internship and I am currently 
-                  expanding my skills in React and modern front-end technologies.
-                </p>
+              <p className="text-primary-dark/80 leading-relaxed text-sm sm:text-base px-2 sm:px-0">
+                I am a fresh graduate in Information Technology with a focus on web development. 
+                I have hands-on experience with Laravel during my internship and I am currently 
+                expanding my skills in React and modern front-end technologies. 
+                I enjoy creating clean, user-friendly websites and continuously learning new things in tech.
+              </p>
+
                 
-                <div className="flex flex-col sm:flex-row gap-3">
+                <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+                  {/* Download CV */}
                   <motion.a
-                    href="/Gabriel_Resume.pdf"
-                    download="Gabriel_Andreas_Resume.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 bg-primary-dark text-white px-4 py-2 rounded-lg hover:bg-primary-dark/90 transition-colors duration-300"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    href="/Gabriel_Resume.pdf"   // path file di public
+                    download="Gabriel_Resume.pdf" // nama file ketika diunduh
+                    className="flex items-center justify-center space-x-2 bg-primary-dark text-white px-4 py-2 rounded-lg hover:bg-primary-dark/90 transition-colors duration-300 text-sm sm:text-base"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     <Download className="w-4 h-4" />
                     <span>Download CV</span>
                   </motion.a>
 
+                  {/* See My Work */}
                   <motion.button
-                    className="flex items-center justify-center gap-2 border border-primary-dark text-primary-dark px-4 py-2 rounded-lg hover:bg-secondary-dark hover:text-white transition-all duration-300"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                onClick={() => {
-                  setShowWorkGallery(true)
-                  // Auto-scroll to modal when it opens
-                  setTimeout(() => {
-                    const modal = document.querySelector('.work-gallery-modal')
-                    if (modal) {
-                      modal.scrollIntoView({ behavior: 'smooth', block: 'center' })
-                    }
-                  }, 200)
-                }}
+                    className="flex items-center justify-center space-x-2 border border-primary-dark text-primary-dark px-4 py-2 rounded-lg hover:bg-primary-dark hover:text-white transition-all duration-300 text-sm sm:text-base"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => setShowWorkGallery(true)}
                   >
                     <Eye className="w-4 h-4" />
                     <span>See My Work</span>
                   </motion.button>
                 </div>
+
               </div>
             </div>
 
             {/* Achievements */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4">
               {achievements.map((achievement, index) => (
                 <motion.div
                   key={achievement.title}
-                  className="bg-white/60 backdrop-blur-sm p-4 rounded-xl text-center hover:bg-white/80 transition-all duration-300"
-                  whileHover={{ scale: 1.02, y: -2 }}
+                  className="bg-white/60 backdrop-blur-sm p-2 sm:p-4 rounded-lg sm:rounded-xl text-center hover:bg-white/80 transition-all duration-300"
+                  whileHover={{ scale: 1.05, y: -2 }}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <div className="text-primary-dark mb-2 flex justify-center">{achievement.icon}</div>
-                  <h4 className="font-bold text-primary-dark text-sm mb-2">{achievement.title}</h4>
-                  <p className="text-xs text-primary-dark/70 leading-relaxed">{achievement.description}</p>
+                  <div className="text-primary-dark mb-1 sm:mb-2 flex justify-center text-sm sm:text-base">{achievement.icon}</div>
+                  <h4 className="font-bold text-primary-dark text-xs sm:text-sm mb-1 leading-tight">{achievement.title}</h4>
+                  <p className="text-xs text-primary-dark/70 leading-tight hidden sm:block">{achievement.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -1094,9 +1111,9 @@ Visit @{githubStats?.login || 'gabandreas'}
       </div>
 
       {/* Work Gallery Modal - Clean & Responsive */}
-                <AnimatePresence>
-                  {showWorkGallery && (
-                    <div className="work-gallery-modal fixed inset-0 z-[1000] flex items-center justify-center p-2 sm:p-4">
+      <AnimatePresence>
+        {showWorkGallery && (
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-2 sm:p-4">
             {/* Backdrop */}
             <motion.div
               className="absolute inset-0 bg-black/80 backdrop-blur-sm"
@@ -1319,7 +1336,7 @@ Visit @{githubStats?.login || 'gabandreas'}
       {/* Fullscreen Image Gallery */}
       <AnimatePresence>
         {showFullscreenImage && (
-          <div className="fixed inset-0 z-[1100] flex items-center justify-center">
+          <div className="fixed inset-0 z-[10000] flex items-center justify-center">
             {/* Backdrop */}
             <motion.div
               className="absolute inset-0 bg-black/95 backdrop-blur-sm"

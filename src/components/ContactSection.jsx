@@ -204,21 +204,21 @@ const ContactSection = () => {
     <motion.section 
       ref={sectionRef}
       id="contact"
-      className="py-16 sm:py-20 relative overflow-hidden"
-      style={{ y, opacity, scale }}
+      className="py-20 relative overflow-hidden"
+      style={{ y, opacity, scale, rotate }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1.5, ease: "easeOut" }}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
-          className="text-center mb-12 sm:mb-16"
+          className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary-dark mb-4 sm:mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary-dark mb-6">
             Get In Touch
           </h2>
           <div className="w-24 h-1 bg-primary-dark mx-auto rounded-full"></div>
@@ -227,29 +227,29 @@ const ContactSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+        <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Info */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="space-y-6"
+            className="space-y-8"
           >
             <div>
-              <h3 className="text-xl font-bold text-primary-dark mb-6 flex items-center gap-2">
-                <MessageSquare className="w-5 h-5" />
+              <h3 className="text-2xl font-bold text-primary-dark mb-6 flex items-center space-x-2">
+                <MessageSquare className="w-6 h-6" />
                 <span>Let's Connect</span>
               </h3>
               
-              <div className="space-y-4">
+              <div className="space-y-6">
                 {contactInfo.map((info, index) => (
                   <motion.div 
                     key={info.label}
-                    className="flex items-center p-4 bg-white/80 backdrop-blur-sm rounded-xl hover:bg-white transition-all duration-300 cursor-pointer"
-                    whileHover={{ scale: 1.02 }}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    className="group flex items-center p-4 bg-white/80 backdrop-blur-sm rounded-xl hover:bg-white transition-all duration-300 cursor-pointer"
+                    whileHover={{ x: 10, scale: 1.02 }}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     onClick={() => {
@@ -257,7 +257,7 @@ const ContactSection = () => {
                       else if (info.href !== '#') window.open(info.href, '_blank')
                     }}
                   >
-                    <div className="bg-primary-dark text-white p-3 rounded-full mr-4">
+                    <div className="bg-primary-dark text-white p-3 rounded-full mr-4 group-hover:scale-110 transition-transform duration-300">
                       {info.icon}
                     </div>
                     <div className="flex-1">
@@ -265,8 +265,14 @@ const ContactSection = () => {
                       <p className="text-primary-dark/80">{info.value}</p>
                       <p className="text-sm text-primary-dark/60">{info.description}</p>
                     </div>
-                    {info.label === 'Email' && copiedEmail && (
-                      <CheckCircle className="w-5 h-5 text-green-500" />
+                    {info.label === 'Email' && (
+                      <motion.button
+                        className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                      >
+                        {copiedEmail ? <CheckCircle className="w-5 h-5 text-green-500" /> : <Copy className="w-5 h-5" />}
+                      </motion.button>
                     )}
                   </motion.div>
                 ))}
@@ -276,18 +282,18 @@ const ContactSection = () => {
             {/* Social Links */}
             <div>
               <h4 className="text-lg font-semibold text-primary-dark mb-4">Follow Me</h4>
-              <div className="flex gap-3">
+              <div className="flex space-x-4">
                 {socialLinks.map((social, index) => (
                   <motion.a
                     key={social.label}
                     href={social.href}
-                    className="p-3 bg-white/80 backdrop-blur-sm border border-primary-dark/20 rounded-full text-primary-dark hover:bg-primary-dark hover:text-white transition-all duration-300"
+                    className={`p-3 bg-white/80 backdrop-blur-sm border border-primary-dark/20 rounded-full text-primary-dark hover:bg-primary-dark hover:text-white transition-all duration-300 ${social.color}`}
                     whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
+                    transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
                   >
                     {social.icon}
                   </motion.a>
@@ -304,6 +310,10 @@ const ContactSection = () => {
                   <span className="font-semibold text-primary-dark">&lt; 24 hours</span>
                 </div>
                 <div className="flex items-center justify-between">
+                  <span className="text-primary-dark/70">Project Inquiries</span>
+                  <span className="font-semibold text-primary-dark">&lt; 2 hours</span>
+                </div>
+                <div className="flex items-center justify-between">
                   <span className="text-primary-dark/70">Availability</span>
                   <span className="font-semibold text-primary-dark">Open to work</span>
                 </div>
@@ -313,26 +323,28 @@ const ContactSection = () => {
 
           {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 sm:p-8 shadow-xl border border-primary-dark/10">
-              <h3 className="text-xl font-bold text-primary-dark mb-6">Send a Message</h3>
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-primary-dark/10">
+              <h3 className="text-2xl font-bold text-primary-dark mb-6">Send a Message</h3>
               
               {/* Quick Reply Buttons */}
               <div className="mb-6">
                 <p className="text-sm text-primary-dark/70 mb-3">Quick replies:</p>
                 <div className="flex flex-wrap gap-2">
                   {quickReplies.map((reply) => (
-                    <button
+                    <motion.button
                       key={reply}
                       onClick={() => setFormData(prev => ({ ...prev, subject: reply }))}
                       className="px-3 py-1 bg-primary-light/30 text-primary-dark rounded-full text-sm hover:bg-primary-light/50 transition-colors duration-300"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                     >
                       {reply}
-                    </button>
+                    </motion.button>
                   ))}
                 </div>
               </div>
