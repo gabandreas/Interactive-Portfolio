@@ -91,14 +91,14 @@ const Footer = () => {
       icon: <Linkedin className="w-6 h-6" />, 
       href: "https://www.linkedin.com/in/gabriel-hutapea-b7a277374/", 
       label: "LinkedIn",
-      color: "hover:text-blue-400",
+      color: "hover:text-primary-light",
       stats: "500+ connections"
     },
     { 
       icon: <Twitter className="w-6 h-6" />, 
       href: "https://x.com/gabbandreass", 
       label: "Twitter",
-      color: "hover:text-blue-400",
+      color: "hover:text-primary-light",
       stats: "1.2k followers"
     },
     { 

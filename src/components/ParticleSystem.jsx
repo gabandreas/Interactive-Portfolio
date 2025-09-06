@@ -77,7 +77,7 @@ const ParticleSystem = () => {
       draw() {
         ctx.save()
         ctx.globalAlpha = this.opacity * this.life
-        ctx.fillStyle = '#154D71'
+        ctx.fillStyle = 'var(--primary-dark)'
         ctx.beginPath()
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
         ctx.fill()
@@ -114,7 +114,7 @@ const ParticleSystem = () => {
           if (distance < 100) {
             ctx.save()
             ctx.globalAlpha = (100 - distance) / 100 * 0.2
-            ctx.strokeStyle = '#154D71'
+            ctx.strokeStyle = 'var(--primary-dark)'
             ctx.lineWidth = 1
             ctx.beginPath()
             ctx.moveTo(particle.x, particle.y)

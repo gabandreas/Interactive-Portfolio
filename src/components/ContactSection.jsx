@@ -70,8 +70,8 @@ const ContactSection = () => {
 
   const socialLinks = [
     { icon: <Github className="w-5 h-5" />, href: "https://github.com/gabandreas", label: "GitHub", color: "hover:text-gray-800" },
-    { icon: <Linkedin className="w-5 h-5" />, href: "https://www.linkedin.com/in/gabriel-hutapea-b7a277374/", label: "LinkedIn", color: "hover:text-blue-600" },
-    { icon: <Twitter className="w-5 h-5" />, href: "https://x.com/gabbandreass", label: "Twitter", color: "hover:text-blue-400" },
+    { icon: <Linkedin className="w-5 h-5" />, href: "https://www.linkedin.com/in/gabriel-hutapea-b7a277374/", label: "LinkedIn", color: "hover:text-primary-light" },
+    { icon: <Twitter className="w-5 h-5" />, href: "https://x.com/gabbandreass", label: "Twitter", color: "hover:text-primary-light" },
     { icon: <Mail className="w-5 h-5" />, href: "mailto:gabandreas32@gmail.com?subject=Hello Gabriel&body=Hi Gabriel, I saw your portfolio and...", label: "Email", color: "hover:text-red-500" }
   ]
 

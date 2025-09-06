@@ -24,11 +24,11 @@ const ThemeSwitcher = () => {
       name: 'Dark', 
       icon: <Moon className="w-4 h-4" />,
       colors: {
-        primary: '#f1f5f9',
-        secondary: '#64748b',
+        primary: '#000000',
+        secondary: '#37353E',
         background: '#0f0f0f',
-        text: '#f1f5f9',
-        accent: '#3b82f6'
+        text: '#000000',
+        accent: '#44444E'
       }
     },
     { 
@@ -40,7 +40,7 @@ const ThemeSwitcher = () => {
         secondary: '#ff00ff',
         background: '#330066',
         text: '#00ffff',
-        accent: '#ffff00'
+        accent: '#ff00ff'
       }
     },
     { 
@@ -48,11 +48,11 @@ const ThemeSwitcher = () => {
       name: 'Sunset', 
       icon: <Palette className="w-4 h-4" />,
       colors: {
-        primary: '#ff4500',
+        primary: '#E62727',
         secondary: '#ff6347',
-        background: '#ffe4b5',
-        text: '#8b0000',
-        accent: '#ffa500'
+        background: '#EF7722',
+        text: '#E62727',
+        accent: '#EF7722'
       }
     }
   ]
@@ -74,9 +74,20 @@ const ThemeSwitcher = () => {
     root.style.setProperty('--theme-bg', theme.colors.background)
     root.style.setProperty('--theme-text', theme.colors.text)
     
+    // Set data-theme attribute for CSS targeting
+    root.setAttribute('data-theme', themeId)
+    
     // Update body background with smooth transition
     document.body.style.transition = 'background-color 0.3s ease'
     document.body.style.background = theme.colors.background
+    
+    // Debug: Log the applied colors
+    console.log('Theme applied:', themeId, {
+      primary: theme.colors.primary,
+      accent: theme.colors.accent,
+      background: theme.colors.background,
+      text: theme.colors.text
+    })
   }
 
   const handleThemeChange = (themeId) => {

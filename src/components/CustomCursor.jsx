@@ -123,7 +123,7 @@ const CustomCursor = () => {
             ? cursorType === 'button' 
               ? 'w-12 h-12 bg-primary-light/30 border-2 border-primary-light' 
               : cursorType === 'link'
-              ? 'w-12 h-12 bg-blue-500/30 border-2 border-blue-500'
+              ? 'w-12 h-12 bg-primary-dark/30 border-2 border-primary-dark'
               : cursorType === 'text'
               ? 'w-2 h-6 bg-primary-dark border-2 border-white'
               : 'w-12 h-12 bg-primary-dark/30 border-2 border-primary-dark'

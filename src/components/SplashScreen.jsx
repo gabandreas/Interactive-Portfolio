@@ -6,7 +6,7 @@ const SplashScreen = ({ onComplete }) => {
   const [hoveredIndex, setHoveredIndex] = useState(null)
   const [isExiting, setIsExiting] = useState(false)
   // Text yang akan ditampilkan
-  const text = "Press Enter to Continue"
+  const text = "Press Enter or Click to Continue"
 
   // 12 gambar yang dipilih
   const images = [
@@ -65,6 +65,11 @@ const SplashScreen = ({ onComplete }) => {
     return () => window.removeEventListener('keydown', handleKeyPress)
   }, [handleEnter])
 
+  // Click handler untuk menutup splash screen
+  const handleClick = () => {
+    handleEnter()
+  }
+
   const getSizeClasses = () => {
     // Semua kotak mengisi penuh grid cell
     return 'w-full h-full'
@@ -75,8 +80,8 @@ const SplashScreen = ({ onComplete }) => {
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden"
-        style={{ cursor: 'default' }}
+        className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden cursor-pointer"
+        onClick={handleClick}
         initial={{ opacity: 1 }}
         exit={{ 
           opacity: 0,

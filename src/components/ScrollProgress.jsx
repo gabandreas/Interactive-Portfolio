@@ -20,13 +20,13 @@ const ScrollProgress = () => {
   }, [])
 
   const sections = [
-    { id: 'home', label: 'Home', color: '#154D71' },
-    { id: 'about', label: 'About', color: '#FFF9AF' },
-    { id: 'skills', label: 'Skills', color: '#154D71' },
-    { id: 'projects', label: 'Projects', color: '#FFF9AF' },
-    { id: 'experience', label: 'Experience', color: '#154D71' },
-    { id: 'hobbies', label: 'Hobbies', color: '#FFF9AF' },
-    { id: 'contact', label: 'Contact', color: '#154D71' }
+    { id: 'home', label: 'Home', color: 'var(--primary-dark)' },
+    { id: 'about', label: 'About', color: 'var(--primary-light)' },
+    { id: 'skills', label: 'Skills', color: 'var(--primary-dark)' },
+    { id: 'projects', label: 'Projects', color: 'var(--primary-light)' },
+    { id: 'experience', label: 'Experience', color: 'var(--primary-dark)' },
+    { id: 'hobbies', label: 'Hobbies', color: 'var(--primary-light)' },
+    { id: 'contact', label: 'Contact', color: 'var(--primary-dark)' }
   ]
 
   const getCurrentSection = () => {
@@ -103,7 +103,7 @@ const ScrollProgress = () => {
         <motion.span
           className="text-sm font-bold text-primary-dark"
           animate={{ 
-            color: scrollY > window.innerHeight ? '#3396D3' : '#154D71'
+            color: scrollY > window.innerHeight ? 'var(--primary-light)' : 'var(--primary-dark)'
           }}
         >
           {Math.round(scrollYProgress.get() * 100)}%
