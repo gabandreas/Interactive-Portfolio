@@ -36,8 +36,8 @@ const ExperienceSection = () => {
     {
       title: "Junior Web Developer (Internship)",
       company: "PT Pratama Link",
-      location: "Malang, Indonesia",
-      period: "Feb 2024 - Jul 2024",
+      location: "Jakarta, Indonesia",
+      period: "Sept 2024 - Jan 2025",
       type: "Internship",
       description: "Worked as a Front-End Developer during a 5-month internship. Responsible for translating UI/UX designs into functional code, building features using Laravel, and integrating APIs.",
       achievements: [
@@ -72,12 +72,12 @@ const ExperienceSection = () => {
       stats: { teamSize: 1, projects: 1, impact: "Medium" }
     },
     {
-      title: "Freelance & Personal Projects",
+      title: "Personal Projects",
       company: "Self-Employed",
       location: "Remote",
-      period: "2023 - Present",
+      period: "Present",
       type: "Freelance / Personal",
-      description: "Worked on freelance and personal projects to sharpen web development skills. Projects include band-tee e-commerce site BootlegInThaHouse and Rockie Clothes e-commerce website.",
+      description: "Keep learning and building projects to sharpen my skills.",
       achievements: [
         "Built interactive portfolio site with React, Tailwind, and Framer Motion",
         "Developed BootlegInThaHouse (band-tee e-commerce concept)",

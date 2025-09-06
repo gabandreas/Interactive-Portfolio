@@ -1,4 +1,4 @@
-import { motion, useInView, useAnimation, useScroll, useTransform } from 'framer-motion'
+import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import { useState, useRef, useEffect } from 'react'
 import { 
   Code, 
@@ -13,7 +13,14 @@ import {
   Layers,
   ChevronRight,
   Star,
-  TrendingUp
+  TrendingUp,
+  Award,
+  Download,
+  Eye,
+  ExternalLink,
+  Calendar,
+  CheckCircle,
+  X
 } from 'lucide-react'
 
 // Animated Counter Component
@@ -44,6 +51,8 @@ const AnimatedCounter = ({ value, duration = 2 }) => {
 
 const SkillsSection = () => {
   const [hoveredSkill, setHoveredSkill] = useState(null)
+  const [showCertificates, setShowCertificates] = useState(false)
+  const [selectedCertificate, setSelectedCertificate] = useState(null)
   const sectionRef = useRef(null)
   
   // Scroll-based animations
@@ -87,6 +96,49 @@ const SkillsSection = () => {
       description: "Tools I use daily to code and deploy projects",
       icon: <Cpu className="w-6 h-6" />
     }
+  ]
+
+  const certificates = [
+    {
+      id: 1,
+      title: "Junior Web Developer",
+      issuer: "BNSP (Badan Nasional Sertifikasi Profesi)",
+      date: "2025",
+      image: "https://sertifikatbnsp.com/wp-content/uploads/2025/05/template-gambar-1024x517.jpg",
+      pdf: "/bnsp-junior-web-developer.pdf",
+      description: "Complete task of competency assessment for junior web developer",
+      skills: ["Laravel", "JavaScript", "Bootstrap CSS"]
+    },
+    {
+      id: 2,
+      title: "Front-End Libraries",
+      issuer: "freeCodeCamp",
+      date: "2025",
+      image: "/Sertifikat_freeCodeCamp.png",
+      pdf: "/Sertifikat_freeCodeCamp.png",
+      description: "Learning about front end libraries and complete task of competency assessment for front-end libraries",
+      skills: ["React.js", "Next.js", "Vue.js", "TypeScript"]
+    },
+    {
+      id: 3,
+      title: "Microsoft Office Specialist",
+      issuer: "Trust Training Partners",
+      date: "2024",
+      image: "/Cert. GABRIEL ANDREAS PANGIHUTAN HUTAPEA (1)_page-0001.jpg",
+      pdf: "/Cert. GABRIEL ANDREAS PANGIHUTAN HUTAPEA (1).pdf",
+      description: "Complete task of competency assessment for Microsoft Office Specialist",
+      skills: ["Office", "Word", "Power Point", "Excel"]
+    },
+    {
+      id: 4,
+      title: "Internship Certificate",
+      issuer: "Pt. Pratama Link",
+      date: "2025",
+      image: "/internship-certificate.png",
+      pdf: "/internship-certificate.png",
+      description: "Complete Internship for 917 Hours as Front-End Developer",
+      skills: ["Laravel", "Postman"]
+    },
   ]
 
   const filteredSkills = developmentSkills
@@ -152,8 +204,16 @@ const SkillsSection = () => {
         </motion.div>
 
 
-        {/* Skills Development Grid */}
-        <div className="grid md:grid-cols-2 gap-8 mb-12" role="list" aria-label="Technical skills and proficiency levels">
+        {/* Skills and Certificates Layout */}
+        <div className="grid lg:grid-cols-2 gap-8 mb-12">
+          {/* Skills Section */}
+          <div className="space-y-8">
+            <div className="text-center lg:text-left">
+              <h3 className="text-2xl font-bold text-primary-dark mb-4">Technical Skills</h3>
+              <p className="text-primary-dark/70">My proficiency in various technologies and frameworks</p>
+            </div>
+            
+            <div className="grid gap-6" role="list" aria-label="Technical skills and proficiency levels">
           {filteredSkills.map((skill, index) => (
             <motion.div
               key={skill.name}
@@ -259,7 +319,261 @@ const SkillsSection = () => {
               </div>
             </motion.div>
           ))}
+            </div>
+          </div>
+
+          {/* Certificates Section */}
+          <div className="space-y-8">
+            <div className="text-center lg:text-left">
+              <h3 className="text-2xl font-bold text-primary-dark mb-4">Certificates & Achievements</h3>
+              <p className="text-primary-dark/70">Professional certifications and learning achievements</p>
+            </div>
+            
+            <div className="grid gap-4">
+              {certificates.slice(0, 4).map((cert, index) => (
+                <motion.div
+                  key={cert.id}
+                  className="group glass-card rounded-xl p-4 depth-2 hover:depth-3 transition-all duration-300 cursor-pointer"
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  onClick={() => setSelectedCertificate(cert)}
+                >
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-primary-dark rounded-lg flex items-center justify-center text-white flex-shrink-0">
+                      <Award className="w-6 h-6" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-bold text-primary-dark text-sm mb-1">
+                        {cert.title}
+                      </h4>
+                      <p className="text-xs text-primary-dark/70 mb-2">{cert.issuer} • {cert.date}</p>
+                      <div className="flex flex-wrap gap-1">
+                        {cert.skills.slice(0, 3).map((skill) => (
+                          <span
+                            key={skill}
+                            className="px-2 py-1 bg-primary-dark/10 text-primary-dark rounded text-xs"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                        {cert.skills.length > 3 && (
+                          <span className="px-2 py-1 bg-primary-dark/10 text-primary-dark rounded text-xs">
+                            +{cert.skills.length - 3}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    <div className="flex space-x-1">
+                      <motion.button
+                        className="p-2 hover:bg-primary-dark/10 rounded-lg transition-colors"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          window.open(cert.pdf, '_blank')
+                        }}
+                        title="Download Certificate"
+                      >
+                        <Download className="w-4 h-4 text-primary-dark" />
+                      </motion.button>
+                      <motion.button
+                        className="p-2 hover:bg-primary-dark/10 rounded-lg transition-colors"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          setSelectedCertificate(cert)
+                        }}
+                        title="View Certificate"
+                      >
+                        <Eye className="w-4 h-4 text-primary-dark" />
+                      </motion.button>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            <motion.button
+              className="w-full py-3 px-4 bg-primary-dark text-white rounded-xl hover:bg-primary-light transition-all duration-300 font-semibold flex items-center justify-center space-x-2"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setShowCertificates(true)}
+            >
+              <Award className="w-5 h-5" />
+              <span>View All Certificates</span>
+              <ChevronRight className="w-4 h-4" />
+            </motion.button>
+          </div>
         </div>
+
+        {/* Certificate Modal */}
+        {selectedCertificate && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <div
+              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+              onClick={() => setSelectedCertificate(null)}
+            />
+            <motion.div
+              className="relative bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+            >
+              <div className="p-6 border-b border-gray-200">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-2xl font-bold text-primary-dark">{selectedCertificate.title}</h3>
+                    <p className="text-primary-dark/70">{selectedCertificate.issuer} • {selectedCertificate.date}</p>
+                  </div>
+                  <button
+                    className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                    onClick={() => setSelectedCertificate(null)}
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+              </div>
+              
+              <div className="p-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <img
+                      src={selectedCertificate.image}
+                      alt={selectedCertificate.title}
+                      className="w-full h-64 object-cover rounded-lg border"
+                    />
+                  </div>
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="font-semibold text-primary-dark mb-2">Description</h4>
+                      <p className="text-sm text-gray-600">{selectedCertificate.description}</p>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-primary-dark mb-2">Skills Covered</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedCertificate.skills.map((skill) => (
+                          <span
+                            key={skill}
+                            className="px-3 py-1 bg-primary-dark/10 text-primary-dark rounded-full text-sm"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="flex space-x-3 pt-4">
+                      <motion.a
+                        href={selectedCertificate.pdf}
+                        download
+                        className="flex items-center space-x-2 px-4 py-2 bg-primary-dark text-white rounded-lg hover:bg-primary-light transition-colors"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <Download className="w-4 h-4" />
+                        <span>Download PDF</span>
+                      </motion.a>
+                      <motion.button
+                        className="flex items-center space-x-2 px-4 py-2 border border-primary-dark text-primary-dark rounded-lg hover:bg-primary-dark hover:text-white transition-colors"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => window.open(selectedCertificate.pdf, '_blank')}
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                        <span>View Online</span>
+                      </motion.button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+
+        {/* All Certificates Modal */}
+        {showCertificates && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <div
+              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+              onClick={() => setShowCertificates(false)}
+            />
+            <motion.div
+              className="relative bg-white rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+            >
+              <div className="p-6 border-b border-gray-200">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-2xl font-bold text-primary-dark">All Certificates</h3>
+                    <p className="text-primary-dark/70">Professional certifications and achievements</p>
+                  </div>
+                  <button
+                    className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                    onClick={() => setShowCertificates(false)}
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+              </div>
+              
+              <div className="p-6 overflow-y-auto max-h-[60vh]">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {certificates.map((cert) => (
+                    <motion.div
+                      key={cert.id}
+                      className="group glass-card rounded-xl p-4 cursor-pointer"
+                      whileHover={{ scale: 1.02, y: -2 }}
+                      onClick={() => {
+                        setShowCertificates(false)
+                        setSelectedCertificate(cert)
+                      }}
+                    >
+                      <div className="aspect-video rounded-lg mb-4 overflow-hidden">
+                        <img
+                          src={cert.image}
+                          alt={cert.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <h4 className="font-bold text-primary-dark mb-2">{cert.title}</h4>
+                      <p className="text-sm text-primary-dark/70 mb-3">{cert.issuer} • {cert.date}</p>
+                      <div className="flex flex-wrap gap-1">
+                        {cert.skills.slice(0, 2).map((skill) => (
+                          <span
+                            key={skill}
+                            className="px-2 py-1 bg-primary-dark/10 text-primary-dark rounded text-xs"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                        {cert.skills.length > 2 && (
+                          <span className="px-2 py-1 bg-primary-dark/10 text-primary-dark rounded text-xs">
+                            +{cert.skills.length - 2}
+                          </span>
+                        )}
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
 
       </div>
     </motion.section>

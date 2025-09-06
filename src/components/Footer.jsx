@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
 import { 
   Github, 
   Linkedin, 
@@ -20,6 +21,61 @@ import {
   Zap,
   Sparkles
 } from 'lucide-react'
+
+// Typing Animation Component
+const TypingAnimation = () => {
+  const [currentText, setCurrentText] = useState('')
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [messageIndex, setMessageIndex] = useState(0)
+  
+  const messages = [
+    "Thank you for visiting my portfolio!",
+    "Hope you found what you were looking for.",
+    "Don't hesitate to reach out to me!",
+    "Let's collaborate and create something amazing!",
+    "See you in the next project! 🚀"
+  ]
+  
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      const currentMessage = messages[messageIndex]
+      
+      if (!isDeleting) {
+        if (currentIndex < currentMessage.length) {
+          setCurrentText(currentMessage.substring(0, currentIndex + 1))
+          setCurrentIndex(currentIndex + 1)
+        } else {
+          setTimeout(() => setIsDeleting(true), 2000)
+        }
+      } else {
+        if (currentIndex > 0) {
+          setCurrentText(currentMessage.substring(0, currentIndex - 1))
+          setCurrentIndex(currentIndex - 1)
+        } else {
+          setIsDeleting(false)
+          setCurrentIndex(0)
+          setMessageIndex((prev) => (prev + 1) % messages.length)
+        }
+      }
+    }, isDeleting ? 50 : 100)
+    
+    return () => clearTimeout(timeout)
+  }, [currentIndex, isDeleting, messageIndex, messages])
+  
+  return (
+    <div className="min-h-[60px] flex items-center justify-center">
+      <p className="text-white/90 text-lg font-medium text-center px-4">
+        {currentText}
+        <motion.span
+          className="inline-block w-0.5 h-6 bg-primary-light ml-1"
+          animate={{ opacity: [0, 1, 0] }}
+          transition={{ duration: 1, repeat: Infinity }}
+        />
+      </p>
+    </div>
+  )
+}
 
 const Footer = () => {
 
@@ -249,25 +305,19 @@ const Footer = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <div className="text-center">
-              <h4 className="text-xl font-bold mb-2 flex items-center justify-center space-x-2">
-                <Sparkles className="w-5 h-5" />
-                <span>Stay Updated</span>
-              </h4>
-              <p className="text-white/80 mb-4">Get notified about my latest projects and insights</p>
-              <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="flex-1 px-4 py-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-primary-light"
-                />
-                <motion.button
-                  className="px-6 py-3 bg-primary-light text-primary-dark rounded-lg font-semibold hover:bg-white transition-colors duration-300"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Subscribe
-                </motion.button>
-              </div>
+              <motion.div
+                className="mb-6"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+              >
+                <h4 className="text-2xl font-bold mb-4 flex items-center justify-center space-x-2">
+                  <Zap className="w-6 h-6 text-yellow-400" />
+                  <span>Thank You!</span>
+                </h4>
+                <TypingAnimation />
+              </motion.div>
             </div>
           </motion.div>
         </div>

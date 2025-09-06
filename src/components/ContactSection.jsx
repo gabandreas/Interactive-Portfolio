@@ -134,12 +134,32 @@ const ContactSection = () => {
     
     setFormStatus('sending')
     
-    // Simulate API call
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      setFormStatus('success')
-      setFormData({ name: '', email: '', subject: '', message: '' })
-    } catch {
+      // Using Formspree for reliable email delivery
+      const response = await fetch('https://formspree.io/f/mblaqrop', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          _replyto: formData.email,
+          _subject: `Portfolio Contact: ${formData.subject}`
+        })
+      })
+      
+      if (response.ok) {
+        setFormStatus('success')
+        setFormData({ name: '', email: '', subject: '', message: '' })
+      } else {
+        throw new Error('Failed to send email')
+      }
+      
+    } catch (error) {
+      console.error('Error sending email:', error)
       setFormStatus('error')
     }
   }

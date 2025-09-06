@@ -132,13 +132,13 @@ const HobbiesSection = () => {
       description: "I love exploring new places, cultures, and foods. Traveling helps me see the world from new perspectives.",
       details: {
         style: "City trips & cultural visits",
-        favoriteDestinations: "Bali, Jogja",
-        dreamDestination: "Japan"
+        favoriteDestinations: "Bali, Pontianak",
+        dreamDestination: "New York"
       },
       favorites: [
         { name: "Bali", type: "Place", reason: "Beach & culture" },
-        { name: "Jogja", type: "Place", reason: "Tradition & food" },
-        { name: "Japan", type: "Dream", reason: "Culture + tech" }
+        { name: "Pontianak", type: "Place", reason: "Food" },
+        { name: "New York", type: "Dream", reason: "City Of Dreams" }
       ],
       achievements: [
         "Visited several cities in Indonesia",

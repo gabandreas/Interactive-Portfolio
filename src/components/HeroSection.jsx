@@ -16,8 +16,8 @@ const HeroSection = () => {
   const roles = [
     "Junior Web Developer",
     "Front-End Programmer", 
-    "Laravel Developer",
-    "React Enthusiast",
+    "Looking For Something Good",
+    "Fresh Graduate",
     "Always Learning"
   ]
 
