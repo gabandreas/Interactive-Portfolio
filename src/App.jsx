@@ -15,30 +15,77 @@ import ThemeSwitcher from './components/ThemeSwitcher'
 import SplashScreen from './components/SplashScreen'
 import ReactGA from "react-ga4";
 
-
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [showSplash, setShowSplash] = useState(true)
 
   useEffect(() => {
-    ReactGA.initialize("G-4G4ZCKYZFH"); // ganti dengan Measurement ID kamu dari GA
-    ReactGA.send({ hitType: "pageview", page: window.location.pathname });
-/*************  ✨ Windsurf Command ⭐  *************/
-  /**
-   * When the user scrolls the page, this function will be called to close the mobile menu.
-   */
-/*******  2bb8f9fe-e59d-4cea-8a20-cf4b91438af5  *******/    const handleScroll = () => {
-      setIsMenuOpen(false)
+    // Initialize Enhanced Google Analytics
+    ReactGA.initialize("G-4G4ZCKYZFH", {
+      debug: true, // set false di production
+    });
+    
+    // Track page view
+    ReactGA.send({
+      hitType: "pageview",
+      page: window.location.pathname,
+      title: document.title
+    });
+
+    // Track user device
+    const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    ReactGA.event({
+      category: 'User Environment',
+      action: 'Device Type',
+      label: isMobile ? 'Mobile' : 'Desktop',
+      transport_type: 'beacon'
+    });
+
+    // Track scroll depth
+    let maxScroll = 0;
+    const trackScroll = () => {
+      const scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+      
+      // Track at 25%, 50%, 75%, 90% intervals
+      if (scrollPercent > maxScroll && [25, 50, 75, 90].includes(scrollPercent)) {
+        maxScroll = scrollPercent;
+        ReactGA.event({
+          category: 'User Engagement',
+          action: 'Scroll Depth',
+          label: `${scrollPercent}%`,
+          value: scrollPercent,
+          transport_type: 'beacon'
+        });
+        console.log(`Scroll depth: ${scrollPercent}%`);
+      }
+    };
+
+    const handleScroll = () => {
+      setIsMenuOpen(false);
+      trackScroll();
     }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [])
+
+  const handleSplashComplete = () => {
+    setShowSplash(false);
+    
+    // Track splash screen completion
+    ReactGA.event({
+      category: 'User Experience',
+      action: 'Splash Screen Completed',
+      transport_type: 'beacon'
+    });
+    console.log('Splash screen completed - tracked!');
+  }
 
   return (
     <div className="App">
       {/* Splash Screen */}
       {showSplash && (
-        <SplashScreen onComplete={() => setShowSplash(false)} />
+        <SplashScreen onComplete={handleSplashComplete} />
       )}
       
       {/* Main Content */}
