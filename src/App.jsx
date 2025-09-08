@@ -13,13 +13,21 @@ import CustomCursor from './components/CustomCursor'
 import ScrollProgress from './components/ScrollProgress'
 import ThemeSwitcher from './components/ThemeSwitcher'
 import SplashScreen from './components/SplashScreen'
+import ReactGA from "react-ga4";
+
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [showSplash, setShowSplash] = useState(true)
 
   useEffect(() => {
-    const handleScroll = () => {
+    ReactGA.initialize("G-4G4ZCKYZFH"); // ganti dengan Measurement ID kamu dari GA
+    ReactGA.send({ hitType: "pageview", page: window.location.pathname });
+/*************  ✨ Windsurf Command ⭐  *************/
+  /**
+   * When the user scrolls the page, this function will be called to close the mobile menu.
+   */
+/*******  2bb8f9fe-e59d-4cea-8a20-cf4b91438af5  *******/    const handleScroll = () => {
       setIsMenuOpen(false)
     }
     window.addEventListener('scroll', handleScroll)
